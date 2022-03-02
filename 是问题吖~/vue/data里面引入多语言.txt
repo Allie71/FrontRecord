@@ -1,0 +1,4 @@
+
+data是一次性生产的，只能是在 data 初始化的时候拿到这些被国际化的值，并不能响应变化。
+
+https://www.mk2048.com/answer/answer_cihjibckj.html

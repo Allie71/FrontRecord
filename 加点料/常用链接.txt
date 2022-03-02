@@ -1,0 +1,25 @@
+
+使用http-server开启一个本地服务器：https://www.cnblogs.com/nolaaaaa/p/9126385.html
+
+package.json： https://www.jianshu.com/p/62646a668d30
+
+Node构建WebSocket服务： https://www.cnblogs.com/zzghk/p/10573437.html
+		           https://juejin.im/post/6876301731966713869?utm_source=gold_browser_extension
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

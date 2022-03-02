@@ -1,0 +1,4 @@
+
+在filters中不能直接对上下文进行操作，是一个独立的函数，
+
+如果要使用this，在data里声明that指向this (that: this)，在过滤函数中传入that

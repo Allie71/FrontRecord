@@ -1,0 +1,315 @@
+$color: red;
+
+.box1 {
+  background-color: $color; // 我不会出现在编译后的css文件中
+  font-size: 16px; /* 我会出现在编译后的css的文件中 */
+}
+
+@mixin rounded-corners {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.box2 {
+  color: red;
+  @include rounded-corners;
+}
+
+@mixin box-shadow($shadow...) {
+  @if length($shadow) >= 1 {
+    @include prefixer(box-shadow, $shadow);
+  } @else{
+    $shadow:0 0 4px rgba(0,0,0,.3);
+    @include prefixer(box-shadow, $shadow);
+  }
+}
+
+@mixin border-radius($radius: 3px){
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+}
+
+.box3 {
+  @include border-radius(50%);
+}
+
+@mixin center($width, $height) {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: $width;
+  height: $height;
+  margin-left: -($width) / 2;
+  margin-top: -($height) / 2;
+}
+
+.box4 {
+  @include center(100px, 200px);
+}
+
+@mixin box-shadow($shadows...){
+  @if length($shadows) >= 1 {
+    -webkit-box-shadow: $shadows;
+    box-shadow: $shadows;
+  } @else {
+    $shadows: 0 0 2px rgba(#000,.25);
+    -webkit-box-shadow: $shadow;
+    box-shadow: $shadow;
+  }
+}
+
+.box {
+  @include box-shadow(0 0 1px rgba(#000,.5),0 0 2px rgba(#000,.2));
+}
+
+.btn {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+.btn-primary {
+  background-color: #f36;
+  color: #fff;
+  @extend .btn;
+}
+
+.btn-second {
+  background-color: orange;
+  color: #fff;
+  @extend .btn;
+}
+
+%mt5 {
+  margin-top: 5px;
+}
+%pt5{
+  padding-top: 5px;
+}
+
+.btn {
+  @extend %mt5;
+  @extend %pt5;
+}
+
+.block {
+  @extend %mt5;
+
+  span {
+    @extend %pt5;
+  }
+}
+
+$fcolor: red;
+.btn1 {
+  color: $color;
+}
+
+/* sass 二 */
+
+@mixin generate-sizes($class, $small, $medium, $big) {
+  #{$class}-small {
+    font-size: $small;
+  }
+  #{$class}-medium {
+    font-size: $medium;
+  }
+  #{$class}-big {
+    font-size: $big;
+  }
+}
+
+@include generate-sizes(".header-text", 12px, 14px, 16px);
+
+
+@mixin padding-direction ($direction, $size) {
+  padding-#{$direction}: $size;
+}
+
+.box5 {
+  @include padding-direction("left", 12px);
+}
+
+// 属性值中插值
+//$margin-big: 40px;
+//$margin-medium: 20px;
+//$margin-small: 12px;
+//
+//@mixin set-margin($size) {
+//  margin: $margin-#{$size};
+//}
+//
+//.box6 {
+//  @include set-margin("big");
+//}
+// 调用混合器时插值
+//@mixin set-margin() {
+//  margin: 15px;
+//}
+//
+//@mixin set-padding() {
+//  padding: 12px;
+//}
+//
+//$flag: "padding";
+//.box6 {
+//  @include set-#{$flag};
+//}
+
+// 继承使用插值
+.btn-active {
+  color: #07f;
+  background-color: #fff;
+}
+
+%btn-selected {
+  color: #fff;
+  background-color: #07f;
+}
+
+$status: "selected";
+
+.box6 {
+  width: 200px;
+  @extend %btn-#{$status};
+}
+
+.box7 {
+  width: 2 * 10px;
+  @extend %btn-selected;
+}
+
+// 除法运算
+.box8 {
+  width: (100px / 2);
+}
+
+p {
+  font: 10px/8px;             // 纯 CSS，不是除法运算
+  $width: 1000px;
+  width: $width/2;            // 使用了变量，是除法运算
+  width: round(1.5)/2;        // 使用了函数，是除法运算
+  height: (500px/2);          // 使用了圆括号，是除法运算
+  margin-left: 5px + 8px/2px; // 使用了加（+）号，是除法运算
+}
+
+$box-width: 100px;
+
+.box8 {
+  width: $box-width / 2;
+}
+
+.box8 {
+  width: 200px / 2 + 20px;
+}
+
+p:before {
+  content: "Foo " + Bar;
+  font-family: sans- + "serif";
+}
+
+@mixin blockOrHidden($boolean:true) {
+  @if $boolean {
+    display: block;
+  }
+  @else {
+    display: none;
+  }
+}
+
+.block {
+  @include blockOrHidden;
+}
+
+.hidden{
+  @include blockOrHidden(false);
+}
+
+@for $i from 1 through 3 {
+  .item-#{$i} { width: 2em * $i; }
+}
+
+@for $i from 1 to 3 {
+  .item-#{$i} { width: 2em * $i }
+}
+
+$count: 4;
+@while $count > 0 {
+  .while-#{$count} {
+    width: $count + 20px;
+  }
+  $count: $count - 1;
+}
+
+$icon-list: success, fail, edit, delete;
+@each $item in $icon-list {
+  .el-icon-#{$item} {
+    background-image: url("images/#{$item}.png");
+  }
+}
+/* 函数 */
+.box9 {
+  content: unquote("hello sass");
+}
+
+.box10 {
+  content: quote(hello);
+}
+
+.box11 {
+  content: quote('hello sass');
+}
+
+.box11 {
+  content: to_lower_case("ABCdeFG");
+}
+
+.box11 {
+  content: to_upper_case("hfjdgDHVHbbc");
+}
+
+.box12 {
+  width: percentage(0.12);
+}
+
+.box13 {
+  $list: 12,14,45,red;
+  width: length($list) * 2;
+}
+
+.box14 {
+  $list: 12px, 14px, 33px;
+  width: nth($list, 2);
+}
+
+.box15 {
+  $list1: a1 a2 a3;
+  $list2: b1 b2;
+  $list3: c1 c2 c3 c4;
+  $list4: d1 d2 d3 d4 d5;
+  content: append($list1, a4, comma);
+}
+
+.box16 {
+  $colors: (
+          primary: #07f,
+          text: #a2b2c2,
+          main: #748ba4
+  );
+  color: rgb(200, 40, 88);
+}
+
+.box17 {
+  $condition: true;
+  width: if($condition, 14px, 24px);
+}
+
+$color: (
+  primary: #07f,
+  text: #748ba4
+);
+
+.box18 {
+  color: map-get($color, text);
+}

@@ -1,0 +1,16 @@
+计算机组成原理：https://www.bilibili.com/video/BV1Xx411Q7Nz?p=1
+
+
+数据结构：https://www.icourse163.org/learn/ZJU-93001?tid=1461682474#/learn/content
+题目练习：https://pintia.cn/problem-sets/1302953266564911104/problems/type/6
+
+
+操作系统：https://www.xuetangx.com/course/THU08091000267/4231154
+
+
+编译原理：https://mooc.study.163.com/course/1000002001#/info
+
+
+数学思维：《数学之美》
+汇编语言：《汇编语言（第3版）》
+
